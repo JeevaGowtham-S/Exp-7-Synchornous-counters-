@@ -84,15 +84,15 @@ Register Number: 212222230053
 ```
 ##### UP COUNTER:
 ```
-module upcounter(D,C,B,A,CLK);
-output reg D,C,B,A;
-input CLK;
-always @(posedge CLK)
+module upcounter(A,clk);
+output reg [3:0]A;
+input clk;
+always@(posedge clk)
 begin
-	D=(C&B&A)^D;
-	C=(B&A)^C;
-	B=(A^B);
-	A=(1^A);
+A[0]=((((A[1])&(A[2]))&A[3])^A[0]);
+A[1]=(((A[2])&(A[3]))^A[1]);
+A[2]=((A[3])^A[2]);
+A[3]=1^A[3];
 end
 endmodule
 ```
